@@ -10,13 +10,15 @@ import { UserCard } from '../organisms/layout/user/UserCard';
 import { useAllUsers } from '../../hooks/useAllUsers';
 import { UserDetailModal } from '../organisms/layout/user/UserDetailModal';
 import { useSelectUser } from '../../hooks/useSelectUser';
+import { useLoginUser } from '../../hooks/useLoginUsers';
 
 export const UserManagement = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, loading, users } = useAllUsers();
   const { onselectUser, selectedUser } = useSelectUser();
+  const { loginUser } = useLoginUser();
 
-  useEffect(() => getUsers(), []);
+  useEffect(() => getUsers(), [getUsers]);
 
   const onClickUser = useCallback(
     (id: number) => {
@@ -46,7 +48,12 @@ export const UserManagement = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal
+        user={selectedUser}
+        isOpen={isOpen}
+        isAdmin={loginUser?.isAdmin}
+        onClose={onClose}
+      />
     </>
   );
 });
