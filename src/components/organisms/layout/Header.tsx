@@ -47,7 +47,7 @@ export const Header = memo(() => {
           display={{ base: 'none', md: 'flex' }}
         >
           <Box pr={4}>
-            <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
+            <Link onClick={onClickUserManagement}>ユーザー</Link>
           </Box>
           <Link onClick={onClickSetting}>設定</Link>
         </Flex>

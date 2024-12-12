@@ -32,7 +32,7 @@ export const MenuDrawer = memo((props: Props) => {
               TOP
             </Button>
             <Button w="100%" onClick={onClickUserManagement}>
-              ユーザー一覧
+              ユーザー
             </Button>
             <Button w="100%" onClick={onClickSetting}>
               設定
