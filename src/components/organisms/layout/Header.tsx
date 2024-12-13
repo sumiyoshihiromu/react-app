@@ -22,6 +22,7 @@ export const Header = memo(() => {
     () => history.push('/home/setting'),
     [history]
   );
+  const onClickSlot = useCallback(() => history.push('/home/slot'), [history]);
 
   const onClickLogout = useCallback(() => {
     setLoginUser(null);
@@ -56,10 +57,13 @@ export const Header = memo(() => {
           flexGrow={2}
           display={{ base: 'none', md: 'flex' }}
         >
-          <Box pr={4}>
+          <Box pr={6}>
             <Link onClick={onClickUserManagement}>ユーザー</Link>
           </Box>
-          <Link onClick={onClickSetting}>設定</Link>
+          <Box pr={6}>
+            <Link onClick={onClickSetting}>設定</Link>
+          </Box>
+          <Link onClick={onClickSlot}>スロット</Link>
           <Box pl={4} marginLeft="auto">
             <Link onClick={onClickLogout}>ログアウト</Link>
           </Box>
