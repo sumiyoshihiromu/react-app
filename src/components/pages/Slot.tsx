@@ -22,7 +22,7 @@ export const Slot = memo(() => {
       if (newReels[0] === newReels[1] && newReels[1] === newReels[2]) {
         setResult('当たり！');
       } else {
-        setResult('はずれ');
+        setResult('はずれ！');
       }
     }, 400);
   };
