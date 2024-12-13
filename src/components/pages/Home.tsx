@@ -12,7 +12,6 @@ export const Home = memo(() => {
         setDisplayedText(text.substring(0, currentIndex + 1));
         setCurrentIndex(currentIndex + 1);
       } else {
-        // 全文字表示後、タイマーを停止
         clearInterval(timer);
       }
     }, 100);
