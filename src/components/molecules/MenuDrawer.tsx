@@ -4,6 +4,8 @@ import {
   DrawerBody,
   DrawerContent,
   DrawerOverlay,
+  Flex,
+  Spacer,
 } from '@chakra-ui/react';
 import { memo } from 'react';
 
@@ -28,15 +30,21 @@ export const MenuDrawer = memo((props: Props) => {
       <DrawerOverlay>
         <DrawerContent>
           <DrawerBody p={0} bg="gray.100">
-            <Button w="100%" onClick={onClickHome}>
-              TOP
-            </Button>
-            <Button w="100%" onClick={onClickUserManagement}>
-              ユーザー
-            </Button>
-            <Button w="100%" onClick={onClickSetting}>
-              設定
-            </Button>
+            <Flex direction="column" h="100%">
+              <Button w="100%" onClick={onClickHome}>
+                TOP
+              </Button>
+              <Button w="100%" onClick={onClickUserManagement}>
+                ユーザー
+              </Button>
+              <Button w="100%" onClick={onClickSetting}>
+                設定
+              </Button>
+              <Spacer />
+              <Button w="100%" onClick={onClickSetting} mb={4}>
+                ログアウト
+              </Button>
+            </Flex>
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>
