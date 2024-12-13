@@ -3,6 +3,7 @@ import { Page404 } from '../components/pages/Page404';
 import { Setting } from '../components/pages/Setting';
 import { Slot } from '../components/pages/Slot';
 import { UserManagement } from '../components/pages/UserManagement';
+import { Weather } from '../components/pages/Weather';
 
 export const homeRoutes = [
   {
@@ -24,6 +25,11 @@ export const homeRoutes = [
     path: '/slot',
     exact: false,
     children: <Slot />,
+  },
+  {
+    path: '/weather',
+    exact: false,
+    children: <Weather />,
   },
   {
     path: '*',

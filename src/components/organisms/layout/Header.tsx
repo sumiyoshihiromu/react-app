@@ -23,6 +23,10 @@ export const Header = memo(() => {
     [history]
   );
   const onClickSlot = useCallback(() => history.push('/home/slot'), [history]);
+  const onClickWeather = useCallback(
+    () => history.push('/home/weather'),
+    [history]
+  );
 
   const onClickLogout = useCallback(() => {
     setLoginUser(null);
@@ -63,7 +67,12 @@ export const Header = memo(() => {
           <Box pr={6}>
             <Link onClick={onClickSetting}>設定</Link>
           </Box>
-          <Link onClick={onClickSlot}>スロット</Link>
+          <Box pr={6}>
+            <Link onClick={onClickSlot}>スロット</Link>
+          </Box>
+          <Box pr={6}>
+            <Link onClick={onClickWeather}>天気</Link>
+          </Box>
           <Box pl={4} marginLeft="auto">
             <Link onClick={onClickLogout}>ログアウト</Link>
           </Box>
