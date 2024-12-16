@@ -46,7 +46,7 @@ export const UserDetailModal = memo((props: Props) => {
   const onChangePhone = (e: ChangeEvent<HTMLInputElement>) =>
     setPhone(e.target.value);
 
-  const onClickUpdate = () => alert('更新しました。（仮）');
+  const onClickUpdate = () => console.log('更新しました。（仮）');
 
   return (
     <Modal

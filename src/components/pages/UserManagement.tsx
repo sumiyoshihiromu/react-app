@@ -15,16 +15,16 @@ import { useLoginUser } from '../../hooks/useLoginUsers';
 export const UserManagement = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, loading, users } = useAllUsers();
-  const { onselectUser, selectedUser } = useSelectUser();
+  const { onSelectUser, selectedUser } = useSelectUser();
   const { loginUser } = useLoginUser();
 
   useEffect(() => getUsers(), [getUsers]);
 
   const onClickUser = useCallback(
     (id: number) => {
-      onselectUser({ id, users, onOpen });
+      onSelectUser({ id, users, onOpen });
     },
-    [onOpen, onselectUser, users]
+    [onOpen, onSelectUser, users]
   );
 
   return (
