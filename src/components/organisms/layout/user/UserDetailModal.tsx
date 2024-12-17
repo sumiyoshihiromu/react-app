@@ -20,10 +20,19 @@ type Props = {
   isOpen: boolean;
   isAdmin?: boolean;
   onClose: () => void;
+  onUserNameChange: (userName: string) => void;
+  onNameChange: (userName: string) => void;
 };
 
 export const UserDetailModal = memo((props: Props) => {
-  const { user, isOpen, isAdmin = false, onClose } = props;
+  const {
+    user,
+    isOpen,
+    isAdmin = false,
+    onClose,
+    onUserNameChange,
+    onNameChange,
+  } = props;
 
   const [userName, setUserName] = useState('');
   const [name, setName] = useState('');
@@ -37,10 +46,16 @@ export const UserDetailModal = memo((props: Props) => {
     setPhone(user?.phone ?? '');
   }, [user]);
 
-  const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) =>
-    setUserName(e.target.value);
-  const onChangeName = (e: ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
+  const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    const newUserName = e.target.value;
+    setUserName(newUserName);
+    onUserNameChange(newUserName); // 親コンポーネントのコールバックを呼び出す
+  };
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setName(newName);
+    onNameChange(newName);
+  };
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
   const onChangePhone = (e: ChangeEvent<HTMLInputElement>) =>

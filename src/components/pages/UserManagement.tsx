@@ -5,20 +5,30 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react';
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { UserCard } from '../organisms/layout/user/UserCard';
 import { useAllUsers } from '../../hooks/useAllUsers';
 import { UserDetailModal } from '../organisms/layout/user/UserDetailModal';
 import { useSelectUser } from '../../hooks/useSelectUser';
 import { useLoginUser } from '../../hooks/useLoginUsers';
+import { User } from '../../types/api/user';
 
 export const UserManagement = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, loading, users } = useAllUsers();
   const { onSelectUser, selectedUser } = useSelectUser();
   const { loginUser } = useLoginUser();
+  const [editedUsers, setEditedUsers] = useState<User[]>([]);
 
-  useEffect(() => getUsers(), [getUsers]);
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      setEditedUsers(users.map((user) => ({ ...user })));
+    }
+  }, [users]);
 
   const onClickUser = useCallback(
     (id: number) => {
@@ -26,6 +36,26 @@ export const UserManagement = memo(() => {
     },
     [onOpen, onSelectUser, users]
   );
+
+  const handleUserNameChange = (userName: string) => {
+    if (selectedUser) {
+      setEditedUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === selectedUser.id ? { ...user, username: userName } : user
+        )
+      );
+    }
+  };
+
+  const handleNameChange = (name: string) => {
+    if (selectedUser) {
+      setEditedUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === selectedUser.id ? { ...user, name: name } : user
+        )
+      );
+    }
+  };
 
   return (
     <>
@@ -35,7 +65,7 @@ export const UserManagement = memo(() => {
         </Center>
       ) : (
         <Wrap p={{ base: 4, md: 10 }}>
-          {users.map((user) => (
+          {editedUsers.map((user) => (
             <WrapItem key={user.id} mx="auto">
               <UserCard
                 id={user.id}
@@ -53,6 +83,8 @@ export const UserManagement = memo(() => {
         isOpen={isOpen}
         isAdmin={loginUser?.isAdmin}
         onClose={onClose}
+        onUserNameChange={handleUserNameChange}
+        onNameChange={handleNameChange}
       />
     </>
   );
